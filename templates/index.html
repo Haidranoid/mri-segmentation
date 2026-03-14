@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Segmentation Lab</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        img {
+            max-width: 100%;
+            border: 1px solid #ccc;
+        }
+
+        .slider-value {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Segmentation Control Panel</h1>
+
+<form method="POST" class="controls">
+
+    <!-- OTSU CHECKBOX -->
+    <label>
+        <input type="checkbox" id="use_otsu" name="use_otsu" {% if form_data.use_otsu=="true" %}checked{% endif %}>
+        Use Otsu (automatic threshold)
+    </label>
+
+    <!-- THRESHOLD SLIDER -->
+    <label>
+        Threshold:
+        <input type="range" id="threshold" name="threshold" min="0" max="1" step="0.01"
+               value="{{ form_data.threshold }}">
+        <span class="slider-value" id="threshold_value">
+                {{ form_data.threshold }}
+            </span>
+    </label>
+    <!-- BINS SLIDER -->
+    <label>
+        Histogram Bins:
+        <input type="range" id="bins" name="bins" min="4" max="512" step="4" value="{{ form_data.bins }}">
+        <span class="slider-value" id="bins_value">
+                {{ form_data.bins }}
+            </span>
+    </label>
+
+    <!-- NORMALIZE -->
+    <label>
+        Normalize:
+        <select name="normalize">
+            <option value="true" {% if form_data.normalize=="true" %}selected{% endif %}>True</option>
+            <option value="false" {% if form_data.normalize=="false" %}selected{% endif %}>False</option>
+        </select>
+    </label>
+
+    <!-- HANDLE NAN -->
+    <label>
+        Handle NaN:
+        <select name="handle_nan">
+            <option value="true" {% if form_data.handle_nan=="true" %}selected{% endif %}>True</option>
+            <option value="false" {% if form_data.handle_nan=="false" %}selected{% endif %}>False</option>
+        </select>
+    </label>
+
+    <label>
+        Rotation angle:
+        <input type="range" id="angle" name="angle" min="-180" max="180" step="1" value="{{ form_data.angle }}">
+        <span class="slider-value" id="angle_value">{{ form_data.angle }}</span>
+    </label>
+
+    <button type="submit">Process</button>
+</form>
+
+{% if image %}
+    <h2>Result</h2>
+    <img src="data:image/png;base64,{{ image }}">
+{% endif %}
+
+<script>
+    const checkbox = document.getElementById("use_otsu");
+    const slider = document.getElementById("threshold");
+    const sliderValue = document.getElementById("threshold_value");
+    const binsSlider = document.getElementById("bins");
+    const binsValue = document.getElementById("bins_value");
+    const angleSlider = document.getElementById("angle");
+    const angleValue = document.getElementById("angle_value");
+
+    function updateBinsValue() {
+        binsValue.textContent = binsSlider.value;
+    }
+
+    function updateState() {
+        slider.disabled = checkbox.checked;
+    }
+
+    function updateSliderValue() {
+        sliderValue.textContent = slider.value;
+    }
+
+    function updateAngleValue() {
+        angleValue.textContent = angleSlider.value;
+    }
+
+    binsSlider.addEventListener("input", updateBinsValue);
+    checkbox.addEventListener("change", updateState);
+    slider.addEventListener("input", updateSliderValue);
+    angleSlider.addEventListener("input", updateAngleValue);
+
+    // inicializar estado al cargar
+    updateBinsValue();
+    updateState();
+    updateAngleValue();
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+flask
+numpy
+nibabel
+matplotlib
+scikit-image
+opencv-python

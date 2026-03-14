@@ -1,0 +1,45 @@
+# -----------------------------
+# Python
+# -----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python build / packaging
+build/
+dist/
+*.egg-info/
+
+# -----------------------------
+# IDE
+# -----------------------------
+.idea/
+.vscode/
+
+# -----------------------------
+# OS
+# -----------------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------------
+# Logs / runtime
+# -----------------------------
+*.log
+
+# -----------------------------
+# Medical datasets (MRI)
+# -----------------------------
+static/Brain/*
+!static/Brain/placeholder.txt
+
+# Optional: ignore other datasets if you add them
+data/
+datasets/
