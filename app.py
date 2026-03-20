@@ -1,9 +1,11 @@
+import sys
 import subprocess
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-PYTHON_EXEC = ".venv/bin/python"
+#PYTHON_EXEC = ".venv/bin/python"
+PYTHON_EXEC = sys.executable
 SEGMENT_MODULE_PATH = "scripts.segment"
 
 @app.route("/", methods=["GET", "POST"])
@@ -44,4 +46,4 @@ def index():
     return render_template("index.html", image=image, form_data=form_data)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

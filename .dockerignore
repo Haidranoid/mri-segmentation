@@ -1,0 +1,35 @@
+static/Brain/*
+!static/Brain/img1t1.nii
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+
+# Version control
+.git/
+.gitignore
+
+# IDE/Editor specific
+.vscode/
+.idea/
+
+# Environment files
+.env
+.flaskenv
+
+# Docker specific (if present in build context)
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+**/bin
+**/obj
