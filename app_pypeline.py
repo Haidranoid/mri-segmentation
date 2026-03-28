@@ -93,14 +93,14 @@ def main():
 
     img = vol[:, :, 74]
 
-    # PIPELINE 🔥
+
     img = rotate_image(img, angle_deg=30)
     img = scale_image(img, scale=0.5)
     img = translate_image(img, tx=20, ty=20)
     img = to_grayscale(img)
     img = crop_image(img, 30, 30, 200, 200)
 
-    # Guardar resultado
+    
     plt.imshow(img, cmap="gray")
     plt.axis("off")
 
